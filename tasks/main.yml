@@ -7,6 +7,8 @@
   yum: name=https://rhel{{ ansible_distribution_major_version }}.iuscommunity.org/ius-release.rpm
   when: ansible_distribution == "Red Hat Enterprise Linux" or ansible_distribution == "RedHat"
 
-
 - name: Import IUS Community Project GPG key
   rpm_key: key=http://dl.iuscommunity.org/pub/ius/IUS-COMMUNITY-GPG-KEY state=present
+
+- name: Fix Global Permissions on IUS-COMMUNITY-EUA
+  file: path=/usr/share/doc/ius-release-1.0/IUS-COMMUNITY-EUA mode=0644
